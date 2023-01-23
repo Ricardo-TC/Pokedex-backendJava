@@ -8,6 +8,10 @@ call consulta_pokemon_all();#consulta de todos los pokes
 
 call consulta_movimientos();#consulta de movimientos con su tipo
 
+call consulta_tipos();
+
+call Consulta_Tipos_ID(3);
+
 #------------------------ INSERT
 call alta_habilidad(192,'testeo telequines');
 

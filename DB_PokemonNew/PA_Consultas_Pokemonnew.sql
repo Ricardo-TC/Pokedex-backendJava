@@ -9,6 +9,8 @@ drop procedure if exists consulta_pokemon;
 drop procedure if exists consulta_pokemon_nombre;
 drop procedure if exists consulta_pokemon_all;
 drop procedure if exists Consulta_Movimientos;
+drop procedure if exists Consulta_Tipos;
+drop procedure if exists Consulta_Tipos_ID;
 
 ## Consulta de pokemon por id y version ó nombre
 delimiter //
@@ -175,5 +177,30 @@ from moves mo
 join `types` ty
 on ty.type_id = mo.type_id
 order by mo.move_id;
+end //
+delimiter ;
+
+## Consulta de tipos
+delimiter //
+create procedure Consulta_Tipos()
+begin
+select 
+	type_id as 'Numero',
+    type_name as 'Tipo',
+    damage_type_id as 'DMG ID'
+from `types`;
+end //
+delimiter ;
+
+## Consulta de tipos por ID
+delimiter /
+create procedure Consulta_Tipos_ID(in ID int)
+begin
+select 
+	type_id as 'Numero',
+    type_name as 'Tipo',
+    damage_type_id as 'DMG ID'
+from `types`
+where type_id=ID;
 end //
 delimiter ;
