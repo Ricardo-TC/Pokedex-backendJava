@@ -26,7 +26,7 @@ public class Prueba {
                         name= lectura.leerConsola();
                         System.out.println("Por favor introduzca id del daño");
                         dmgid=Integer.parseInt(lectura.leerConsola());
-                        controller.createType(id,name,dmgid);
+                        controller.createType(new TypeModel(id,name,dmgid));//llamada a insert
                         break;
                     case 2://consultar
                         System.out.println("##-Submenu-##");
@@ -36,8 +36,7 @@ public class Prueba {
                             case 1 -> {//consulta por id
                                 System.out.println("Por favor introduzca id a consultar");
                                 id = Integer.parseInt(lectura.leerConsola());
-                                System.out.println(controller.getType(id).toString());
-                                //controller=null;
+                                System.out.println(controller.getType(id).toString());//llamada a consulta id
                             }
                             case 2 -> {//consulta todos
                                 List<TypeModel> lista = controller.getAll();
@@ -55,12 +54,12 @@ public class Prueba {
                         name= lectura.leerConsola();
                         System.out.println("Por favor introduzca id del daño");
                         dmgid=Integer.parseInt(lectura.leerConsola());
-                        controller.updateType(id,name,dmgid);
+                        controller.updateType(new TypeModel(id,name,dmgid));//llamada a update
                         break;
                     case 4://borrar tipo
                         System.out.println("Por favor introduzca id a eliminar");
                         id=Integer.parseInt(lectura.leerConsola());
-                        controller.deleteType(id);
+                        controller.deleteType(id);//llamada a delete
                         break;
                     case 5:
                         System.out.println("Saliendo del sistema.");

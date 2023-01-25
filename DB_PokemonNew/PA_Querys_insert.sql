@@ -15,9 +15,9 @@ end //
 delimiter ;
 
 delimiter //
-create procedure `Alta_Movimiento`(in ID int,in nombre varchar(79),in idTipo int,in poder int, in pp int,in accu int)
+create procedure `Alta_Movimiento`(in nombre varchar(79),in idTipo int,in poder int, in pp int,in accu int)
 begin
-insert into moves(move_id,move_name,type_id,move_power,move_pp,move_accuracy) values(ID,nombre,idTipo,poder,pp,accu);
+insert into moves(move_name,type_id,move_power,move_pp,move_accuracy) values(nombre,idTipo,poder,pp,accu);
 end //
 delimiter ;
 

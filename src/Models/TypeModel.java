@@ -8,6 +8,12 @@ public class TypeModel {
 
     public TypeModel(){}
 
+    public TypeModel(int id, String nombre, int dmgID) {
+        this.id = id;
+        this.nombre = nombre;
+        this.dmgID = dmgID;
+    }
+
     @Override
     public String toString() {
         return "TypeModel{" +
@@ -15,12 +21,6 @@ public class TypeModel {
                 ", nombre='" + nombre + '\'' +
                 ", dmgID=" + dmgID +
                 '}';
-    }
-
-    public TypeModel(int id, String nombre, int dmgID) {
-        this.id = id;
-        this.nombre = nombre;
-        this.dmgID = dmgID;
     }
 
     public int getId() {

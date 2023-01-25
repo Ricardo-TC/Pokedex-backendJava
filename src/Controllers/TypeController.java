@@ -9,11 +9,9 @@ import java.util.List;
 
 public class TypeController {
     //mandar a llamar getType de servicio
-
+    TypeService servicio = new TypeService();
 
     public TypeController() {    }
-
-    TypeService servicio = new TypeService();
 
     public TypeModel getType(int id)throws SQLException {
         return servicio.getType(id);
@@ -23,16 +21,22 @@ public class TypeController {
         return servicio.getAll();
     }
 
-    public TypeModel createType(int id, String name, int dmgid)throws SQLException{
-        return servicio.createType(id,name,dmgid);
+    public void createType(TypeModel tipo)throws SQLException{
+        if(servicio.createType(tipo))
+            System.out.println("Tipo agregado correctamente");
+        else
+            System.out.println("Error al agregar tipo");
     }
 
-    public TypeModel updateType(int id, String name, int dmgid) throws SQLException{
-        return servicio.updateType(id,name,dmgid);
+    public boolean updateType(TypeModel tipo) throws SQLException{
+        return servicio.updateType(tipo);
     }
 
-    public TypeModel deleteType(int id) throws SQLException{
-        return servicio.deleteType(id);
+    public void deleteType(int id) throws SQLException{
+        if(servicio.deleteType(id))
+            System.out.println("Tipo eliminado correctamente");
+        else
+            System.out.println("Error al eliminar tipo");
     }
 
 }

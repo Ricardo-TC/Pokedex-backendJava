@@ -15,7 +15,7 @@ call Consulta_Tipos_ID(3);
 #------------------------ INSERT
 call alta_habilidad(192,'testeo telequines');
 
-call Alta_Movimiento(624,'testeo movimiento karatazo',2,100,50,100);
+call Alta_Movimiento('testeo movimiento karatazo',2,100,50,100);
 
 call Alta_tipo(19,'testeo de tipo',18);
 
