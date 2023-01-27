@@ -11,6 +11,49 @@ drop procedure if exists consulta_pokemon_all;
 drop procedure if exists Consulta_Movimientos;
 drop procedure if exists Consulta_Tipos;
 drop procedure if exists Consulta_Tipos_ID;
+drop procedure if exists consulta_movimiento_all;
+drop procedure if exists consulta_movimiento_id;
+drop procedure if exists consulta_habilidad_all;
+drop procedure if exists consulta_habilidad_id;
+desc `abilities`;
+##consulta de habilidad all
+delimiter //
+create procedure consulta_habilidad_all()
+begin
+select abil_id,abil_name
+from abilities
+order by abil_id;
+end //
+delimiter ;
+
+delimiter //
+create procedure consulta_habilidad_id(in ID int)
+begin
+select abil_id,abil_name
+from abilities
+where abil_id=ID;
+end //
+delimiter ;
+
+##consulta de movimiento por id
+delimiter //
+create procedure consulta_movimiento_id(in ID int)
+begin
+select move_id,move_name,type_id,move_power,move_pp,move_accuracy
+from moves
+where move_id=ID;
+end //
+delimiter ;
+
+##consulta de todos en movimientos
+delimiter //
+create procedure consulta_movimiento_all()
+begin
+select move_id,move_name,type_id,move_power,move_pp,move_accuracy
+from moves
+order by move_id;
+end //
+delimiter ;
 
 ## Consulta de pokemon por id y version ó nombre
 delimiter //

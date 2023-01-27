@@ -8,12 +8,20 @@ call consulta_pokemon_all();#consulta de todos los pokes
 
 call consulta_movimientos();#consulta de movimientos con su tipo
 
-call consulta_tipos();
+call consulta_movimiento_all();#consulta movimiento todos
 
-call Consulta_Tipos_ID(3);
+call consulta_movimiento_id(21);#consulta movimiento por id
+
+call consulta_tipos();#consulta todos los tipos
+
+call Consulta_Tipos_ID(3);#consulta los tipos por id
+
+call consulta_habilidad_all();#consulta habilidad todos
+
+call consulta_habilidad_id(2);#consulta habilidad por id
 
 #------------------------ INSERT
-call alta_habilidad(192,'testeo telequines');
+call alta_habilidad('testeo telequines');
 
 call Alta_Movimiento('testeo movimiento karatazo',2,100,50,100);
 
@@ -37,7 +45,7 @@ call modifica_pokemon(1,'bulbasaur',7,69,64);
 call Modifica_Pokemon_Habilidades(222,1,55,0);
 
 #------------------- DELETE
-call Borrar_Habilidades(192);
+call Borrar_Habilidades(199);
 
 call Borrar_Movimientos(624);
 

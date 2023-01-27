@@ -8,9 +8,9 @@ drop procedure if exists alta_habilidades_pokemon;
 drop procedure if exists alta_movimientos_pokemon;
 
 delimiter //
-create procedure `Alta_Habilidad`(in id int, in `name` varchar(79))
+create procedure `Alta_Habilidad`(in `name` varchar(79))
 begin
-insert into abilities(abil_id,abil_name) values (id,`name`);
+insert into abilities(abil_name) values (`name`);
 end //
 delimiter ;
 
