@@ -16,7 +16,7 @@ public class AbilityService {
 
     private PreparedStatement sentencia;
     private ResultSet reSet;
-    private AbilityModel resultado = new AbilityModel();
+    private AbilityModel resultado;
     private Herramientas validar = new Herramientas();
 
     public boolean createAbility(AbilityModel habilidad){

@@ -15,7 +15,82 @@ drop procedure if exists consulta_movimiento_all;
 drop procedure if exists consulta_movimiento_id;
 drop procedure if exists consulta_habilidad_all;
 drop procedure if exists consulta_habilidad_id;
-desc `abilities`;
+drop procedure if exists consulta_pokemon_tma_all;
+drop procedure if exists consulta_pokemon_tma_ID;
+
+##consulta depokemon con move, type, ability, por ID
+delimiter //
+create procedure consulta_pokemon_tma_ID(in ID int)
+begin
+select
+	`pok`.`pok_id` as 'Numero',
+	pok.pok_name as 'Nombre',
+    pok.pok_weight as 'Peso',
+    pok.pok_height as 'Altura',
+    group_concat(distinct mvs.move_name separator ', ') as 'Movimiento',
+    group_concat(distinct abi.abil_name separator ', ') as 'Habilidades',
+    group_concat(distinct typ.type_name separator ', ') as 'Elemento'
+    
+#### movimientos del poke
+from pokemon pok
+left join pokemon_moves pokmvs
+on pokmvs.pok_id = pok.pok_id
+left join 	moves mvs
+on 	pokmvs.move_id = mvs.move_id
+
+#### habilidades del pokemon
+left join pokemon_abilities pokabi
+on pokabi.pok_id = pok.pok_id
+left join abilities abi
+on abi.abil_id = pokabi.abil_id
+#### elementos del pokemon
+left join pokemon_types poktyp
+on pok.pok_id = poktyp.pok_id
+left join `types` typ
+on typ.type_id = poktyp.type_id
+where pok.pok_id=ID
+group by pok.pok_id;
+
+end //
+delimiter ;
+
+##consulta depokemon con move, type, ability
+delimiter //
+create procedure consulta_pokemon_tma_all()
+begin
+select
+	`pok`.`pok_id` as 'Numero',
+	pok.pok_name as 'Nombre',
+    pok.pok_weight as 'Peso',
+    pok.pok_height as 'Altura',
+    group_concat(distinct mvs.move_name separator ', ') as 'Movimiento',
+    group_concat(distinct abi.abil_name separator ', ') as 'Habilidades',
+    group_concat(distinct typ.type_name separator ', ') as 'Elemento'
+    
+#### movimientos del poke
+from pokemon pok
+left join pokemon_moves pokmvs
+on pokmvs.pok_id = pok.pok_id
+left join 	moves mvs
+on 	pokmvs.move_id = mvs.move_id
+
+#### habilidades del pokemon
+left join pokemon_abilities pokabi
+on pokabi.pok_id = pok.pok_id
+left join abilities abi
+on abi.abil_id = pokabi.abil_id
+#### elementos del pokemon
+left join pokemon_types poktyp
+on pok.pok_id = poktyp.pok_id
+left join `types` typ
+on typ.type_id = poktyp.type_id
+
+group by pok.pok_id;
+
+end //
+delimiter ;
+
+
 ##consulta de habilidad all
 delimiter //
 create procedure consulta_habilidad_all()

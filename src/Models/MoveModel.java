@@ -9,16 +9,6 @@ public class MoveModel {
     private String pp;
     private String accuracy;
 
-    public MoveModel(){}
-
-    public MoveModel(String name, String type_id, String power, String pp, String accuracy) {
-        this.name = name;
-        this.type_id = type_id;
-        this.power = power;
-        this.pp = pp;
-        this.accuracy = accuracy;
-    }
-
     public MoveModel(String id, String name, String type_id, String power, String pp, String accuracy) {
         this.id = id;
         this.name = name;

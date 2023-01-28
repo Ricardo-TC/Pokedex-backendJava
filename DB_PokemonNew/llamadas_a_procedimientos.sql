@@ -1,5 +1,9 @@
 use pokemonnew;
 #------------------------- CONSULTAS
+call consulta_pokemon_tma_ID(2);#consulta pokemon tma por ID
+
+call consulta_pokemon_tma_all();#consulta pokemon tma todos
+
 call consulta_pokemon(2,2,'mew');#consulta por id, version o nombre
 
 call consulta_pokemon_nombre('bulbasaur',1);#consulta por nombre
@@ -21,6 +25,8 @@ call consulta_habilidad_all();#consulta habilidad todos
 call consulta_habilidad_id(2);#consulta habilidad por id
 
 #------------------------ INSERT
+call alta_pokemon_all(724,'test',20,50,100,15,1,6,5,15,1,5,6);
+
 call alta_habilidad('testeo telequines');
 
 call Alta_Movimiento('testeo movimiento karatazo',2,100,50,100);
@@ -32,6 +38,8 @@ call Alta_Pokemon(725,'testpokenuevo',3,33,44);
 call Alta_habilidades_pokemon(722,13,0,7);
 
 call alta_movimientos_pokemon(1,1,15,6,1);
+
+call alta_tipos_pokemon(725,15,6);
 
 #---------------------- UPDATE
 call modifica_habilidades(2,'drizzle');

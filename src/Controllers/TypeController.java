@@ -13,7 +13,7 @@ public class TypeController {
 
     public TypeController() {    }
 
-    public TypeModel getType(int id)throws SQLException {
+    public TypeModel getType(String id)throws SQLException {
         return servicio.getType(id);
     }
 
@@ -32,7 +32,7 @@ public class TypeController {
         return servicio.updateType(tipo);
     }
 
-    public void deleteType(int id) throws SQLException{
+    public void deleteType(String id) throws SQLException{
         if(servicio.deleteType(id))
             System.out.println("Tipo eliminado correctamente");
         else

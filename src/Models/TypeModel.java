@@ -2,32 +2,21 @@ package Models;
 
 public class TypeModel {
 
-    private int id;
+    private String id;
     private String nombre;
-    private int dmgID;
+    private String dmgID;
 
-    public TypeModel(){}
-
-    public TypeModel(int id, String nombre, int dmgID) {
+    public TypeModel(String id, String nombre, String dmgID) {
         this.id = id;
         this.nombre = nombre;
         this.dmgID = dmgID;
     }
 
-    @Override
-    public String toString() {
-        return "TypeModel{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", dmgID=" + dmgID +
-                '}';
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -39,11 +28,20 @@ public class TypeModel {
         this.nombre = nombre;
     }
 
-    public int getDmgID() {
+    public String getDmgID() {
         return dmgID;
     }
 
-    public void setDmgID(int dmgID) {
+    public void setDmgID(String dmgID) {
         this.dmgID = dmgID;
+    }
+
+    @Override
+    public String toString() {
+        return "TypeModel{" +
+                "id='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", dmgID='" + dmgID + '\'' +
+                '}';
     }
 }

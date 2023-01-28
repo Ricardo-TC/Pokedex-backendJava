@@ -4,14 +4,8 @@ public class AbilityModel {
     private String id;
     private String name;
 
-    public AbilityModel(){}
-
     public AbilityModel(String id, String name) {
         this.id = id;
-        this.name = name;
-    }
-
-    public AbilityModel(String name) {
         this.name = name;
     }
 

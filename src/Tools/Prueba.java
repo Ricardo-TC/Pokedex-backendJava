@@ -12,7 +12,7 @@ public class Prueba {
         Herramientas lectura = new Herramientas();
         int opcion=0,subopcion=0,id=0,dmgid=0;
         String name="";
-
+/*
         try{
             do{
                 System.out.println("-----MENU DE OPCIONES TIPOS DE POKEMON-----");
@@ -73,5 +73,7 @@ public class Prueba {
         }catch(Exception e){
             e.printStackTrace();
         }
+
+ */
     }
 }

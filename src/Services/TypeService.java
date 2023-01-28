@@ -1,6 +1,7 @@
 package Services;
 
 import Models.TypeModel;
+import Tools.Herramientas;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
@@ -15,6 +16,7 @@ public class TypeService {
     private PreparedStatement sentencia = null;
     private ResultSet reSet = null;
     private TypeModel resultado = null;
+    private Herramientas validar = new Herramientas();
 
     public TypeService(){}
 
@@ -31,23 +33,21 @@ public class TypeService {
         return true;
     }
 
-    public TypeModel getType(int id){
+    public TypeModel getType(String id){
         //la conexion a la bd para el id del tipo y se regresa un typemodel
-        reSet=null;
-        resultado=null;
+        reSet=null;resultado=null;
+
         try (Connection con = getConnection()) {
             sentencia = con.prepareStatement("call consulta_tipos_id(?)");
-            sentencia.setInt(1,id);
+            sentencia.setString(1,id);
 
             reSet = sentencia.executeQuery();
 
             if(!reSet.isBeforeFirst())//verifica si el ResulSet esta vacio
                 throw new SQLException();
 
-            if(reSet.next()){
-                System.out.println(reSet.getString(2));
-                resultado = new TypeModel(reSet.getInt(1),reSet.getString(2),reSet.getInt(3));
-            }
+            if(reSet.next())
+                resultado = new TypeModel(reSet.getString(1),reSet.getString(2),reSet.getString(3));
 
         }catch(SQLException e){
             System.out.println("\n -----El dato ingresado "+id+" no existe-----\n");
@@ -61,13 +61,13 @@ public class TypeService {
 
     public List<TypeModel> getAll(){
         List<TypeModel> listado = new ArrayList<>();
-        sentencia = null;
+        sentencia = null;reSet=null;
         try (Connection con = getConnection()){
             sentencia = con.prepareStatement("call consulta_tipos()");
 
             reSet = sentencia.executeQuery();
             while(reSet.next()){
-                listado.add(new TypeModel(reSet.getInt(1),reSet.getString(2),reSet.getInt(3)));
+                listado.add(new TypeModel(reSet.getString(1),reSet.getString(2),reSet.getString(3)));
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -76,17 +76,17 @@ public class TypeService {
     }
 
     public boolean createType(TypeModel tipo) {
-        sentencia = null;
-        validarTipo(tipo);
-        if(!validarTipo(tipo)){
-            System.out.println("Favor de ingresar el nombre correcto");
-            return false;
-        }
+        sentencia = null;reSet=null;
+
+        if(!validar.validarNumero(tipo.getId()))return false;
+        if(!validar.validarCadena(tipo.getNombre()))return false;
+        if(!validar.validarNumero(tipo.getDmgID()))return false;
+
         try(Connection con = getConnection()){
             sentencia = con.prepareStatement("call alta_tipo(?,?,?)");
-            sentencia.setInt(1,tipo.getId());
+            sentencia.setString(1,tipo.getId());
             sentencia.setString(2,tipo.getNombre());
-            sentencia.setInt(3,tipo.getDmgID());
+            sentencia.setString(3,tipo.getDmgID());
 
             reSet = sentencia.executeQuery();
         }catch(SQLException e){
@@ -100,16 +100,20 @@ public class TypeService {
     }
 
     public boolean updateType(TypeModel tipo){
-        sentencia = null;
+        sentencia = null;reSet=null;
+
+        if(!validar.validarNumero(tipo.getId()))return false;
+        if(!validar.validarCadena(tipo.getNombre()))return false;
+        if(!validar.validarNumero(tipo.getDmgID()))return false;
+
         try(Connection con = getConnection()){
             sentencia = con.prepareStatement("call modifica_tipos(?,?,?)");
-            sentencia.setInt(1,tipo.getId());
+            sentencia.setString(1,tipo.getId());
             sentencia.setString(2,tipo.getNombre());
-            sentencia.setInt(3,tipo.getDmgID());
+            sentencia.setString(3,tipo.getDmgID());
 
             reSet = sentencia.executeQuery();
         }catch (SQLException e){
-            System.out.println("\n -----Revisa el dato ingresado-----\n");
             return false;
         }catch(Exception e){
             e.printStackTrace();
@@ -118,11 +122,12 @@ public class TypeService {
         return true;
     }
 
-    public boolean deleteType(int id)throws SQLException{
+    public boolean deleteType(String id)throws SQLException{
         sentencia=null;
+
         try(Connection con = getConnection()){
             sentencia = con.prepareStatement("call borrar_tipos(?)");
-            sentencia.setInt(1,id);
+            sentencia.setString(1,id);
 
             reSet = sentencia.executeQuery();
         }catch(SQLException e){
