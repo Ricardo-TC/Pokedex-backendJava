@@ -46,7 +46,6 @@ public class PokemonService {
                 sentencia.setString(2,habilidad.getId());
                 sentencia.setString(3,"0");
                 sentencia.setString(4,"1");
-                System.out.println(sentencia.toString());
                 reSet = sentencia.executeQuery();
             }
             for(MoveModel movimiento : poke.getMovimientos()){
@@ -111,9 +110,6 @@ public class PokemonService {
             //boolean hasData = callSentencia.execute();
             reSet = callSentencia.executeQuery();
 
-            //if(!reSet.isBeforeFirst())throw new SQLException();
-            //reSet = callSentencia.getResultSet();
-
             String pID="";
             String pName="";
             String pAlto="";
@@ -128,24 +124,21 @@ public class PokemonService {
 
             }
             if (!callSentencia.getMoreResults()) {
-                System.out.println("Algo ha fallado. Debería haber                        habido otro ResultSet, hay que salir.");
-                        System.exit(0);
+                System.out.println("no hay registros");
             }
             reSet = callSentencia.getResultSet();
             while(reSet.next()){
                 listaGetAbility.add(new AbilityModel(reSet.getString(1), reSet.getString(2)));
             }
             if (!callSentencia.getMoreResults()) {
-                System.out.println("Algo ha fallado. Debería haber                        habido otro ResultSet, hay que salir.");
-                System.exit(0);
+                System.out.println("No hay registros");
             }
             reSet = callSentencia.getResultSet();
             while(reSet.next()){
                 listaGetMove.add(new MoveModel(reSet.getString(1),reSet.getString(2),reSet.getString(3),reSet.getString(4),reSet.getString(5),reSet.getString(6)));
             }
             if (!callSentencia.getMoreResults()) {
-                System.out.println("Algo ha fallado. Debería haber                        habido otro ResultSet, hay que salir.");
-                System.exit(0);
+                System.out.println("No hay registros");
             }
             reSet = callSentencia.getResultSet();
             while(reSet.next()){
@@ -163,6 +156,78 @@ public class PokemonService {
         }
 
         return resultado;
+    }
+
+    public boolean deletePokemon(String id){
+        reSet = null;
+
+        if(!validar.validarNumero(id))return false;
+
+        try(Connection con = getConnection()){
+            CallableStatement callSentencia = con.prepareCall("call borrar_poke_all(?)");
+            callSentencia.setString(1,id);
+            reSet = callSentencia.executeQuery();
+
+        }catch(SQLException e){
+            return false;
+        }
+
+
+        return true;
+    }
+
+    public boolean updatePokemon(PokemonModel updatePoke){
+        reSet = null;
+
+        if(!validar.validarNumero(updatePoke.getId()))return false;
+
+        try(Connection con = getConnection()){
+            CallableStatement delete = con.prepareCall("call borrar_poke_all(?)");
+            delete.setString(1,updatePoke.getId());
+            reSet = delete.executeQuery();
+
+            CallableStatement insert = con.prepareCall("call alta_pokemon(?,?,?,?,?)");
+            insert.setString(1, updatePoke.getId());
+            insert.setString(2, updatePoke.getName());
+            insert.setString(3,updatePoke.getHeight());
+            insert.setString(4,updatePoke.getWeight());
+            insert.setString(5,updatePoke.getExp());
+            reSet = insert.executeQuery();
+
+            for(AbilityModel abilityModel : updatePoke.getHabilidades()){
+                insert = con.prepareCall("call alta_habilidades_pokemon(?,?,?,?)");
+                insert.setString(1, updatePoke.getId());
+                insert.setString(2,abilityModel.getId());
+                insert.setString(3,"0");
+                insert.setString(4,"1");
+                reSet = insert.executeQuery();
+            }
+
+            for(MoveModel moveModel : updatePoke.getMovimientos()){
+                insert = con.prepareCall("call alta_movimientos_pokemon(?,?,?,?,?)");
+                insert.setString(1,updatePoke.getId());
+                insert.setString(2,"1");
+                insert.setString(3,moveModel.getId());
+                insert.setString(4,"2");
+                insert.setString(5,"0");
+                reSet = insert.executeQuery();
+            }
+
+            for(TypeModel typeModel : updatePoke.getTipos()){
+                insert = con.prepareCall("call alta_tipos_pokemon(?,?,?)");
+                insert.setString(1, updatePoke.getId());
+                insert.setString(2, typeModel.getId());
+                insert.setString(3,"5");
+                reSet = insert.executeQuery();
+            }
+
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
 }

@@ -28,8 +28,11 @@ public class TypeController {
             System.out.println("Error al agregar tipo");
     }
 
-    public boolean updateType(TypeModel tipo) throws SQLException{
-        return servicio.updateType(tipo);
+    public void updateType(TypeModel tipo) throws SQLException{
+        if(servicio.updateType(tipo))
+            System.out.println("Registro actualizado correctamente");
+        else
+            System.out.println("Error al actualizar el registro");
     }
 
     public void deleteType(String id) throws SQLException{

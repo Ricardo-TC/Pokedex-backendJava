@@ -35,11 +35,11 @@ call Alta_tipo(19,'testeo de tipo',18);
 
 call Alta_Pokemon(725,'testpokenuevo',3,33,44);
 
-call Alta_habilidades_pokemon(722,13,0,7);
+call Alta_habilidades_pokemon(733,13,0,7);
 
-call alta_movimientos_pokemon(1,1,15,6,1);
+call alta_movimientos_pokemon(733,1,15,6,1);
 
-call alta_tipos_pokemon(725,15,6);
+call alta_tipos_pokemon(733,15,6);
 
 #---------------------- UPDATE
 call modifica_habilidades(2,'drizzle');
@@ -53,6 +53,8 @@ call modifica_pokemon(1,'bulbasaur',7,69,64);
 call Modifica_Pokemon_Habilidades(222,1,55,0);
 
 #------------------- DELETE
+call borrar_poke_all(735);
+
 call Borrar_Habilidades(199);
 
 call Borrar_Movimientos(624);

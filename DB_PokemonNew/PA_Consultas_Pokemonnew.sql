@@ -18,7 +18,6 @@ drop procedure if exists consulta_habilidad_id;
 drop procedure if exists consulta_pokemon_tma_all;
 drop procedure if exists consulta_pokemon_tma_ID;
 
-call consulta_pokemon_tma_ID(2);
 ##consulta de pokemon como debe ser de all
 delimiter //
 create procedure consulta_pokemon_tma_ID(in ID int)
@@ -304,7 +303,7 @@ end //
 delimiter ;
 
 ## Consulta de tipos por ID
-delimiter /
+delimiter //
 create procedure Consulta_Tipos_ID(in ID int)
 begin
 select 

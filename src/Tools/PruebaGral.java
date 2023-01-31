@@ -20,18 +20,18 @@ public class PruebaGral {
         AbilityController abilityController = new AbilityController();
         PokemonController pokemonController = new PokemonController();
 
-/*
-        typeController.createType(new TypeModel("58","test","55"));
 
-        System.out.println(typeController.getType("18").toString());
+        //typeController.createType(new TypeModel("57","test","18"));
 
-        List<TypeModel> listaTypePrint = typeController.getAll();
-        for(TypeModel typeModel : listaTypePrint)
-            System.out.println(typeModel.toString());
+      //  System.out.println(typeController.getType("57").toString());
 
-        typeController.updateType(new TypeModel("18","test","15"));
+     //   List<TypeModel> listaTypePrint = typeController.getAll();
+     //   for(TypeModel typeModel : listaTypePrint)
+     //       System.out.println(typeModel.toString());
 
-        typeController.deleteType("58");
+      //  typeController.updateType(new TypeModel("57","test","15"));
+
+        //typeController.deleteType("57");
 
 /*
         //creacion de registro nuevo
@@ -91,7 +91,26 @@ public class PruebaGral {
         List<PokemonModel> listaPokemonPrint = pokemonController.getPokemonAll();
         for(PokemonModel pokemonModel : listaPokemonPrint)
             System.out.println(pokemonModel.tooString());
-*/
+
         System.out.println(pokemonController.getPokemonID("3").toString());
+
+        pokemonController.deletePokemonAll("734");
+
+
+
+        List<AbilityModel> abilityList = new ArrayList<>();
+
+        abilityList.add(new AbilityModel("3","das"));
+
+        List<MoveModel> moveList = new ArrayList<>();
+
+        moveList.add(new MoveModel("20","otro","2","50","55","100"));
+
+        List<TypeModel> typeList = new ArrayList<>();
+
+        typeList.add(new TypeModel("2","adas","55"));
+
+        pokemonController.updatePokemon(new PokemonModel("733","poketest","10","50","150",abilityList,moveList,typeList));
+*/
     }
 }

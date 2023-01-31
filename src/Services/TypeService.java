@@ -90,7 +90,8 @@ public class TypeService {
 
             reSet = sentencia.executeQuery();
         }catch(SQLException e){
-            System.out.println("\n  -----Dato duplicado, favor de ingresar un dato valido diferente del ID: "+tipo.getId()+"-----\n");
+            System.out.println("Error: "+e.getMessage());
+            e.printStackTrace();
             return false;
         }catch(Exception e){
             e.printStackTrace();
