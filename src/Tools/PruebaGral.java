@@ -20,6 +20,7 @@ public class PruebaGral {
         AbilityController abilityController = new AbilityController();
         PokemonController pokemonController = new PokemonController();
 
+/*
         typeController.createType(new TypeModel("58","test","55"));
 
         System.out.println(typeController.getType("18").toString());
@@ -70,7 +71,7 @@ public class PruebaGral {
 
         //eliminar habilidad
         abilityController.deleteAbility("217");
-     */
+
 
         List<AbilityModel> abilityList = new ArrayList<>();
 
@@ -84,7 +85,13 @@ public class PruebaGral {
 
         typeList.add(new TypeModel("2","adas","55"));
 
-
         pokemonController.createPokemon(new PokemonModel("735","poketest","10","50","150",abilityList,moveList,typeList));
+
+
+        List<PokemonModel> listaPokemonPrint = pokemonController.getPokemonAll();
+        for(PokemonModel pokemonModel : listaPokemonPrint)
+            System.out.println(pokemonModel.tooString());
+*/
+        System.out.println(pokemonController.getPokemonID("3").toString());
     }
 }

@@ -16,7 +16,19 @@ public class PokemonModel {
     private List<MoveModel> movimientos;
     private List<TypeModel> tipos;
 
-    public PokemonModel(){}
+    private String abNames;
+    private String moNames;
+    private String tiNames;
+
+    public PokemonModel(String id, String name, String height, String weight, String abNames, String moNames, String tiNames) {
+        this.id = id;
+        this.name = name;
+        this.height = height;
+        this.weight = weight;
+        this.abNames = abNames;
+        this.moNames = moNames;
+        this.tiNames = tiNames;
+    }
 
     public PokemonModel(String id, String name, String height, String weight, String exp, List<AbilityModel> habilidades, List<MoveModel> movimientos, List<TypeModel> tipos) {
         this.id = id;
@@ -93,6 +105,30 @@ public class PokemonModel {
         this.tipos = tipos;
     }
 
+    public String getAbNames() {
+        return abNames;
+    }
+
+    public void setAbNames(String abNames) {
+        this.abNames = abNames;
+    }
+
+    public String getMoNames() {
+        return moNames;
+    }
+
+    public void setMoNames(String moNames) {
+        this.moNames = moNames;
+    }
+
+    public String getTiNames() {
+        return tiNames;
+    }
+
+    public void setTiNames(String tiNames) {
+        this.tiNames = tiNames;
+    }
+
     @Override
     public String toString() {
         return "PokemonModel{" +
@@ -104,6 +140,18 @@ public class PokemonModel {
                 ", habilidades=" + habilidades +
                 ", movimientos=" + movimientos +
                 ", tipos=" + tipos +
+                '}';
+    }
+
+    public String tooString() {
+        return "PokemonModel{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", height='" + height + '\'' +
+                ", weight='" + weight + '\'' +
+                ", abNames='" + abNames + '\'' +
+                ", moNames='" + moNames + '\'' +
+                ", tiNames='" + tiNames + '\'' +
                 '}';
     }
 }
